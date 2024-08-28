@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eventspecification xmlns="http://www.ericsson.com/PmEvents">
+    <general>
+        <docno>LMI-11:0000</docno>
+        <revision>V1</revision>
+        <date>2013-11-07</date>
+        <author>Sergey Sachkov</author>
+        <ffv>1</ffv>
+        <revisionhistory>
+            <revisionhistoryelem>
+                <revision>PA1</revision>
+                <comment>2013-11-07, LMI/LXR/SH Sergey Sachkov</comment>
+            </revisionhistoryelem>
+        </revisionhistory>
+    </general>
+
+    <!-- Note: <extracolumns> and <extracolumn> are tags used to add extra columns
+        at the beginning of an event table. These columns are added by the parser. -->
+    <extracolumns>
+        <extracolumn type="TIMESTAMP">EVENT_TIME</extracolumn>
+        <extracolumn type="TEXT">SUBNET_NAME</extracolumn>
+        <extracolumn type="TEXT">NE_NAME</extracolumn>
+        <extracolumn type="TEXT">EVENT_NAME</extracolumn>
+        <extracolumn type="TEXT">EVENT_VERSION</extracolumn>
+    </extracolumns>
+    <parametertypes>
+        <parametertype>
+            <name>LATITUDE</name>
+            <type>DOUBLE</type>
+            <description>LATITUDE</description>
+            <numberofbytes>8</numberofbytes>
+            <unit>bytes</unit>
+        </parametertype>
+        <parametertype>
+            <name>LONGITUDE</name>
+            <type>DOUBLE</type>
+            <description>LONGITUDE</description>
+            <numberofbytes>8</numberofbytes>
+            <unit>bytes</unit>
+        </parametertype>
+        <parametertype>
+            <name>APID</name>
+            <type>UINT</type>
+            <description>APID</description>
+            <numberofbytes>4</numberofbytes>
+        </parametertype>
+        <parametertype>
+            <name>DESCRIPTION</name>
+            <type>STRING</type>
+            <description>DESCRIPTION</description>
+            <numberofbytes>256</numberofbytes>
+        </parametertype>
+        <parametertype>
+            <name>TIME_START</name>
+            <type>TIMESTAMP</type>
+            <description>A time stamp</description>
+            <numberofbytes>4</numberofbytes>
+            <range>
+                <low>0</low>
+                <high>2147483647</high>
+            </range>
+        </parametertype>
+        <parametertype>
+            <name>TIME_STOP</name>
+            <type>TIMESTAMP</type>
+            <description>A time stamp</description>
+            <numberofbytes>4</numberofbytes>
+            <range>
+                <low>0</low>
+                <high>2147483647</high>
+            </range>
+        </parametertype>
+        <parametertype>
+            <name>UPLINK_VOLUME</name>
+            <type>DOUBLE</type>
+            <description>UPLINK_VOLUME</description>
+            <numberofbytes>8</numberofbytes>
+            <unit>bytes</unit>
+        </parametertype>
+        <parametertype>
+            <name>DOWNLINK_VOLUME</name>
+            <type>DOUBLE</type>
+            <description>DOWNLINK_VOLUME</description>
+            <numberofbytes>8</numberofbytes>
+            <unit>bytes</unit>
+        </parametertype>
+        <parametertype>
+            <name>AVG_CONNECTION_BANDWIDTH</name>
+            <type>DOUBLE</type>
+            <description>AVG_CONNECTION_BANDWIDTH</description>
+            <numberofbytes>8</numberofbytes>
+            <unit>bytes</unit>
+        </parametertype>
+        <parametertype>
+            <name>EID</name>
+            <type>UINT</type>
+            <description>EID</description>
+            <numberofbytes>4</numberofbytes>
+        </parametertype>
+    </parametertypes>
+    <structuretypes>
+
+    </structuretypes>
+
+    <!-- Note: Events or parameters can be removed from parsing by adding the
+        attribute "ignore" to the event or parameter definition. To ignore an event:
+        <event ignore="true"> To ignore a parameter in an event: <param ignore="true"> -->
+    <events>
+        <event>
+            <name>AP_PROFILE</name>
+            <id>10214</id>
+            <elements>
+                <param type="LATITUDE">LATITUDE</param>
+                <param type="LONGITUDE">LONGITUDE</param>
+                <param type="APID">AP_PROFILE_APID</param>
+                <param type="DESCRIPTION">DESCRIPTION</param>
+            </elements>
+        </event>
+        <event>
+            <name>WIFI_STAT</name>
+            <id>10215</id>
+            <elements>
+                <param type="TIME_START">TIME_START</param>
+                <param type="TIME_STOP">TIME_STOP</param>
+                <param type="UPLINK_VOLUME">UPLINK_VOLUME</param>
+                <param type="DOWNLINK_VOLUME">DOWNLINK_VOLUME</param>
+                <param type="AVG_CONNECTION_BANDWIDTH">AVG_CONNECTION_BANDWIDTH</param>
+                <param type="APID">WIFI_STATS_APID</param>
+                <param type="EID">EID</param>
+            </elements>
+        </event>
+    </events>
+</eventspecification>

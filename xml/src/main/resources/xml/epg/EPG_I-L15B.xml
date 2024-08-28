@@ -1,0 +1,1519 @@
+<?xml version="1.0" encoding="utf-8"?>
+<eventspecification xmlns="http://www.ericsson.com/PmEvents">
+  <general>
+    <docno>1/155 19-AXB 250 12</docno>
+    <revision>I</revision>
+    <date>2015-06-02</date>
+    <author>Marianne Hagmar and Juan Xu and Chengqiong Xie</author>
+    <ffv>20</ffv>
+    <fiv>2</fiv>
+    <revisionhistory>
+      <revisionhistoryelem>
+        <revision>PA3</revision>
+        <comment>
+          2012-04-04, EPG 13A.
+          2 New events was included: INITIAL and DATA_USAGE. Added new optional parameters to the existing struct PDN_INFO.
+        </comment>
+      </revisionhistoryelem>
+      <revisionhistoryelem>
+        <revision>PA11</revision>
+        <comment>
+          2012-05-11, EPG 2013A.
+          Used 3GPP standard: Release 8, 2009-06
+        </comment>
+      </revisionhistoryelem>
+      <revisionhistoryelem>
+        <revision>B</revision>
+        <comment>
+          2013-01-10, EPG 13A.
+          Used 3GPP standard: Release 9, 2010-10.
+          Updated GTPV2_CAUSE_CODE values.
+          Removed keyword optional from structs within PDN_INFO and UE_INFO.
+          Renamed INITIAL event to SESSION_INFO.
+          Highest possible value for DURATION is 6777215.
+          Update of the description for PDN_ID, TIME_HOUR, TIME_MINUTE, TIME_SECOND, TIME_MILLISECOND and DURATION.
+        </comment>
+      </revisionhistoryelem>
+      <revisionhistoryelem>
+        <revision>PC1</revision>
+        <comment>
+          2013-03-27, EPG 13A.
+          Updated the descriptions for the parameters APN, URI-NAME, and RULE_SPACE.
+        </comment>
+      </revisionhistoryelem>
+      <revisionhistoryelem>
+        <revision>PC2</revision>
+        <comment>
+          2013-04-04, EPG 2013B.
+          Using 3GPP TS 29.274 Release 10, 2013-03. Updated GTPv2-C Cause values.
+          Changed the ffv and fiv tags to enable use of CPG and EPG in parallel (margin in number series).
+        </comment>
+      </revisionhistoryelem>
+      <revisionhistoryelem>
+        <revision>PC3</revision>
+        <comment>
+          2013-05-14, EPG 2013B.
+          Added 2 new event SESSION_SUSPENSION and SESSION_RESUME for suspend and resume procedure.
+          Added new SUB_CAUSE_CODE value TEID_UNKNOWN.
+          Added new ORIGINATING_NODE value UNKNOWN.
+        </comment>
+      </revisionhistoryelem>
+      <revisionhistoryelem>
+        <revision>PC4</revision>
+        <comment>
+          2013-05-17, EPG 13B.
+          Used 3GPP standard: Release 10, 2011-12.
+          Added 2 new event triggers for handover to and from non-3GPP.
+        </comment>
+      </revisionhistoryelem>
+      <revisionhistoryelem>
+        <revision>PD1</revision>
+        <comment>
+          2013-07-12, EPG 13B.
+          Remove the TAI struct and instead replace it with its separate parameters; MCC, MNC, and TAC.
+        </comment>
+      </revisionhistoryelem>
+      <revisionhistoryelem>
+        <revision>PE1</revision>
+        <comment>
+          2013-11-22, EPG 2013B CP01.
+          Added new SUB_CAUSE_CODE value MEI_IE_MISSING_OR_INVALID.
+          Update the description of IMSI_VALIDATION.
+        </comment>
+      </revisionhistoryelem>
+      <revisionhistoryelem>
+        <revision>PE2</revision>
+        <comment>
+          2014-01-15, EPG 2013B CP01.
+          Add 2 new subcause codes BEARER_INCONSISTENCY_BETWEEN_CP_UP_DURING_CP_FAILOVER and RESTORATION_OF_USER_PLANE_RESILIENCE_FAILED for session resilience functionality.
+        </comment>
+      </revisionhistoryelem>
+      <revisionhistoryelem>
+        <revision>PF1</revision>
+        <comment>
+          2014-06-02, EPG 2014B CP02.
+          New event added:
+            DOWNLINK_DATA_NOTIFICATION
+
+          New event triggers added due to new Downlink Data Notification event/Network triggered service restoration procedure:
+            SERVICE_REQUEST_DUE_TO_DOWNLINK_DATA_RECEIVED
+            SERVICE_RESTORATION_DUE_TO_DOWNLINK_DATA_RECEIVED
+            SERVICE_RESTORATION_DUE_TO_MESSAGE_RECEIVED
+            SERVICE_RESTORATION_BY_TRYING_ANOTHER_MME
+            DOWNLINK_DATA_NOTIFICATION_FAILURE_INDICATION_RECEIVED
+            ERROR_INDICATION_RECEIVED
+            RELOCATION_TO_OTHER_MME_IN_POOL
+
+          New sub-cause codes added due to new Downlink Data Notification event/Network triggered service restoration procedure:
+            MME_OR_SGSN_ATTACHED_UE_TO_ANOTHER_SGW
+            CONTEXT_NOT_FOUND_IN_MME_OR_SGSN
+            MME_OR_SGSN_UNABLE_TO_PAGE_UE
+            MME_OR_SGSN_UNABLE_TO_PAGE_UE_DUE_TO_SUSPENSION
+            UE_NOT_RESPONDING
+            MME_OR_SGSN_HAS_DENIED_SERVICE
+            DOWNLINK_DATA_NOTIFICATION_FAILED
+            DOWNLINK_DATA_NOTIFICATION_FAILURE_INDICATION_RECEIVED
+            SERVICE_RESTORATION_SUPERVISION_TIMER_EXPIRED
+            SERVICE_RESTORATION_CLEANOUT_TIMER_EXPIRED
+            MME_HAS_RESTARTED_WHEN_SERVICE_RESTORATION_ENABLED
+        </comment>
+      </revisionhistoryelem>
+      <revisionhistoryelem>
+        <revision>PF2</revision>
+        <comment>
+          2014-09-01, EPG 2014B CP02.
+
+          New event trigger added:
+          EVENT_INVOKED_BY_MANAGEMENT
+
+          New sub-cause codes added:
+          INVOKED_BY_MANAGEMENT
+        </comment>
+      </revisionhistoryelem>
+      <revisionhistoryelem>
+        <revision>PF3</revision>
+        <comment>
+          2014-09-05, EPG 2014B CP02.
+
+          Updated event triggers from:
+            SERVICE_RESTORATION_BY_TRYING_ANOTHER_MME
+            RELOCATION_TO_OTHER_MME_IN_POOL
+          To:
+            SERVICE_RESTORATION_BY_TRYING_ANOTHER_MME_OR_SGSN
+            RELOCATION_TO_OTHER_MME_OR_SGSN_IN_POOL
+
+          Updated sub-cause code from:
+            MME_HAS_RESTARTED_WHEN_SERVICE_RESTORATION_ENABLED
+          To:
+            MME_OR_SGSN_HAS_RESTARTED_WHEN_SERVICE_RESTORATION_ENABLED
+        </comment>
+      </revisionhistoryelem>
+      <revisionhistoryelem>
+        <revision>PG1</revision>
+        <comment>
+          2014-10-07, EPG 2014B CP02.
+
+          Added event trigger:
+            SERVICE_RESTORATION_DUE_TO_ERROR_INDICATION_RECEIVED
+        </comment>
+      </revisionhistoryelem>
+      <revisionhistoryelem>
+        <revision>PH1</revision>
+        <comment>
+          2014-12-12, EPG 2015A.
+
+          New specific sub-cause codes added in range less than 700:
+            INVALID_RESPONSE_FROM_MME_OR_SGSN
+            INVALID_RESPONSE_FROM_PGW
+            REJECTION_RESPONSE_FROM_PGW
+            GTP_SEND_FAILURE_TO_PGW
+            REJECTION_RESPONSE_FROM_MME_OR_SGSN
+            UNEXPECTED_S4U_SGSN_FTEID
+            UNEXPECTED_S12_RNC_FTEID
+            MISSING_S4U_SGSN_FTEID
+            MISSING_S12_RNC_FTEID
+            PMIP_ON_S5S8_NOT_SUPPORTED
+            BEARER_LIMIT_EXCEEDED
+            BEARERS_NOT_IN_PDN_CONNECTION
+            DEFAULT_BEARER_MISSING_IN_MESSAGE
+            OPERATION_AND_SCOPE_INDICATION_FLAGS_SET
+            PGW_S5S8_ADDRESS_MISSING
+            UNEXPECTED_S1_ENODEB_FTEID
+            MISSING_S1_ENODEB_FTEID
+            DIRECT_TUNNEL_FLAG_DIFFERENT_FROM_STORED_VALUE
+            USER_PLANE_RESOURCE_ALLOCATION_FAILED
+            DEFAULT_BEARER_ALREADY_IN_USE
+            ERROR_INDICATION_ON_DEFAULT_BEARER_FROM_PGW
+            BEARERS_NOT_MATCHING_REQUEST
+            BEARER_ID_ALREADY_IN_USE
+            ALL_BEARERS_IN_EXISTING_PDN_CONNECTION
+            PGW_S5S8_ADDRESS_TEID_ZERO_AND_OPERATION_INDICATION_FLAG_SET
+            MAIN_CAUSE_ACCEPTED_AND_ALL_BEARER_CAUSES_REJECTED
+            MISSING_S5S8U_PGW_FTEID
+            UNEXPECTED_S5S8U_PGW_FTEID
+            GTP_SEND_FAILURE_TO_MME_OR_SGSN
+
+          New general IE sub-cause codes added in range greater than or equeal to 700:
+            XXXXXXX_IE_MISSING_OR_INVALID   (where XXXXXXXX is the name of the IE)
+
+          Moved sub-cause code to dedicated range above 700:
+            MEI_IE_MISSING_OR_INVALID
+        </comment>
+      </revisionhistoryelem>
+      <revisionhistoryelem>
+        <revision>PH2</revision>
+        <comment>
+          2015-02-03, EPG 15A.
+
+          New sub-cause codes added:
+          SGW_MEMORY_OVERLOAD_PROTECTION
+        </comment>
+      </revisionhistoryelem>
+      <revisionhistoryelem>
+        <revision>PI1</revision>
+        <comment>
+          2015-01-26, EPG 2015B
+
+          Added event trigger:
+            SERVICE_REQUEST_DUE_TO_SERVICE_AWARE_SMART_PAGING
+
+          Added parameter type:
+            DSCP
+
+          Added optional parameter to DOWNLINK_DATA_NOTIFICATION:
+            INNER_DSCP
+        </comment>
+      </revisionhistoryelem>
+      <revisionhistoryelem>
+        <revision>PI2</revision>
+        <comment>
+          2015-02-12, EPG 2015B.
+
+          Split XML file into two files:
+          * Main event XML file (this file)
+          * Cause Code and Sub Cause Code XML file
+
+          The new more expressive enum format in CC/SCC XML file is only used for parameters INTERNAL_CAUSE_CODE, 
+          GTPV2_CAUSE_CODE, and SUB_CAUSE_CODE, and includes actions to be taken for certain CC/SCC.
+          All other parameters use the old enum format in main event file.
+          This solution have been inherited from SGSN/MME.
+
+          Also adjusted some parameter and SCC descriptions according to input from review.
+          Added info about originating function (SGW or PGW) in event comment.
+          Added info about for which function (SGW or PGW) certain parameters/structures are not present, in order to support CPI generation.
+        </comment>
+      </revisionhistoryelem>
+      <revisionhistoryelem>
+        <revision>PI3</revision>
+        <comment>
+          2015-02-17, EPG 2015B.
+
+          Adjusted some parameter, CC, and SCC descriptions according to input from review by CPI writer.
+        </comment>
+      </revisionhistoryelem>
+      <revisionhistoryelem>
+        <revision>PI4</revision>
+        <comment>
+          2015-04-08, EPG 2015B.
+
+          Adjusted some parameter, CC, and SCC descriptions according to input from review by CPI editor.
+        </comment>
+      </revisionhistoryelem>
+      <revisionhistoryelem>
+        <revision>PI5</revision>
+        <comment>
+          2015-06-02, EPG 2015B CP01.
+
+          WP629: Added new trigger PAUSE_CHARGING_DUE_TO_DROPPED_PAYLOAD for BEARER_MODIFICATION.
+        </comment>
+      </revisionhistoryelem>
+    </revisionhistory>
+    <Capabilities>
+      <JobPersistence>RESTART</JobPersistence>
+      <EventCapabilities>
+        <OutputFormat>Ericsson_Binary</OutputFormat>
+        <Protocol>STREAM</Protocol>
+        <Compression>NONE</Compression>
+      </EventCapabilities>
+    </Capabilities>
+  </general>
+   <extracolumns>
+      <extracolumn type="TIMESTAMP">EVENT_TIME</extracolumn>
+      <extracolumn type="TEXT">SUBNET_NAME</extracolumn>
+      <extracolumn type="TEXT">NE_NAME</extracolumn>
+      <extracolumn type="TEXT">EVENT_NAME</extracolumn>
+      <extracolumn type="TEXT">EVENT_VERSION</extracolumn>
+  </extracolumns>
+  <parametertypes>
+    <parametertype>
+      <name>RECORD_LENGTH</name>
+      <type>UINT</type>
+      <description>Total numer of bytes in this binary</description>
+      <numberofbits>16</numberofbits>
+      <range>
+        <low>4</low>
+        <high>65532</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>FILE_FORMAT_VERSION</name>
+      <type>UINT</type>
+      <description>
+        The file format version is incremented if there is a change in the file format which impacts the existing structure of an event - 
+        changes in file structure that requires updates of the controlling XML schema or new parameters added in the middle of an event.
+      </description>
+      <numberofbits>8</numberofbits>
+      <range>
+        <low>1</low>
+        <high>255</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>FILE_INFORMATION_VERSION</name>
+      <type>UINT</type>
+      <description>The file information version is incremented if there is a change in the file information, for example new events or new parameters added in the end of the events.</description>
+      <numberofbits>8</numberofbits>
+      <range>
+        <low>1</low>
+        <high>255</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>TIME_YEAR</name>
+      <type>UINT</type>
+      <description>Year</description>
+      <numberofbits>16</numberofbits>
+      <range>
+        <low>1970</low>
+        <high>9999</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>TIME_MONTH</name>
+      <type>UINT</type>
+      <description>Month</description>
+      <numberofbits>8</numberofbits>
+      <range>
+        <low>1</low>
+        <high>12</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>TIME_DAY</name>
+      <type>UINT</type>
+      <description>Year</description>
+      <numberofbits>8</numberofbits>
+      <range>
+        <low>1</low>
+        <high>31</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>TIME_HOUR</name>
+      <type>UINT</type>
+      <description>UTC timestamp (Hour) at the time when the event was triggered (HH)</description>
+      <numberofbits>5</numberofbits>
+      <range>
+        <low>0</low>
+        <high>23</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>TIME_MINUTE</name>
+      <type>UINT</type>
+      <description>UTC timestamp (Minute) at the start of the usage period (MM)</description>
+      <numberofbits>6</numberofbits>
+      <range>
+        <low>0</low>
+        <high>59</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>TIME_SECOND</name>
+      <type>UINT</type>
+      <description>UTC timestamp (Second) at the start of the usage period (SS)</description>
+      <detaileddescription>The second value 60 indicates a leap second.</detaileddescription>
+      <numberofbits>6</numberofbits>
+      <range>
+        <low>0</low>
+        <high>60</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>TIME_MILLISECOND</name>
+      <type>UINT</type>
+      <description>UTC timestamp (MilliSecond) at the start of the usage period (MSS)</description>
+      <numberofbits>10</numberofbits>
+      <range>
+        <low>0</low>
+        <high>999</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>DURATION</name>
+      <type>UINT</type>
+      <description>Duration of the event in milliseconds</description>
+      <detaileddescription>
+        Calculated from when the event procedure starts (that is the first request is received/sent) until the event procedure ends (that is the first accept or reject response is sent/received).
+        If the duration of the event exceeds 16777215 ms the value of the DURATION parameter starts counting from 0 again.
+      </detaileddescription>
+      <numberofbits>24</numberofbits>
+      <range>
+        <low>0</low>
+        <high>16777215</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>FILE_TERMINATION_CAUSE</name>
+      <type>ENUM</type>
+      <description>Reason for ending the logging</description>
+      <numberofbits>8</numberofbits>
+      <enumeration>
+        <enum internal="TIME" value="0">OK (default)</enum>
+        <enum internal="SIZE" value="1">Max file size exceeded</enum>
+        <enum internal="UNDEFINED" value="2">Other</enum>
+        <enum internal="ROP" value="3">ROP reconfigured</enum>
+      </enumeration>
+    </parametertype>
+    <parametertype>
+      <name>RECORD_TYPE</name>
+      <type>ENUM</type>
+      <description>Record type</description>
+      <numberofbits>8</numberofbits>
+      <enumeration>
+        <enum internal="HEADER_RECORD" value="0">Header</enum>
+        <enum internal="EVENT_RECORD" value="1">Event</enum>
+        <enum internal="ERROR_RECORD" value="2">Error</enum>
+        <enum internal="FOOTER_RECORD" value="3">Footer</enum>
+        <enum internal="STREAM_HEADER_RECORD" value="4">Stream Header</enum>
+        <enum internal="STREAM_ERROR_RECORD" value="5">Stream Error</enum>
+      </enumeration>
+    </parametertype>
+    <parametertype>
+      <name>EVENT_ID</name>
+      <type>ENUM</type>
+      <description>Event identity</description>
+      <numberofbits>8</numberofbits>
+      <enumeration>
+        <enum internal="SESSION_DELETION" value="0">Session Deletion</enum>
+        <enum internal="BEARER_DELETION" value="1">Dedicated Bearer Deletion</enum>
+        <enum internal="SESSION_CREATION" value="2">Session Creation</enum>
+        <enum internal="BEARER_CREATION" value="3">Dedicated Bearer or second PDP Context Creation</enum>
+        <enum internal="BEARER_MODIFICATION" value="4">Bearer Modification</enum>
+        <enum internal="BEARER_UPDATE" value="5">Bearer Update</enum>
+        <enum internal="SESSION_INFO" value="6">SESSION_INFO</enum>
+        <enum internal="DATA_USAGE" value="7">DATA_USAGE</enum>
+        <enum internal="SESSION_SUSPENSION" value="8">Session Suspension</enum>
+        <enum internal="SESSION_RESUME" value="9">Session Resume</enum>
+        <enum internal="DOWNLINK_DATA_NOTIFICATION" value="10">Downlink Data Notification</enum>
+      </enumeration>
+    </parametertype>
+    <parametertype>
+      <name>RAT</name>
+      <type>ENUM</type>
+      <description>Radio Access Type</description>
+      <numberofbits>2</numberofbits>
+      <enumeration>
+        <enum internal="GSM" value="0">GSM (GERAN)</enum>
+        <enum internal="WCDMA" value="1">WCDMA (UTRAN)</enum>
+        <enum internal="LTE" value="2">LTE (EUTRAN)</enum>
+        <enum internal="CDMA" value="3">CDMA 2000 (eHRPD or HRPD)</enum>
+      </enumeration>
+    </parametertype>
+    <parametertype>
+      <name>EVENT_RESULT</name>
+      <type>ENUM</type>
+      <description>Result of the event procedure</description>
+      <numberofbits>2</numberofbits>
+      <enumeration>
+        <enum internal="SUCCESS" value="0">Success</enum>
+        <enum internal="REJECT" value="1">Reject</enum>
+        <enum internal="ABORT" value="2">Abort</enum>
+        <enum internal="IGNORE" value="3">Ignore</enum>
+      </enumeration>
+    </parametertype>
+    <parametertype>
+      <name>CAUSE_PROTOCOL</name>
+      <type>ENUM</type>
+      <description>Indicates from which protocol the cause code originates.</description>
+      <detaileddescription>The current release only uses GPTV2 and INTERNAL. INTERNAL causes codes are used when no external signalling is involved.</detaileddescription>
+      <numberofbits>3</numberofbits>
+      <enumeration>
+        <enum internal="INTERNAL" value="0">INTERNAL</enum>
+        <enum internal="GTPV1" value="1">GTPV1</enum>
+        <enum internal="GTPV2" value="2">GTPV2</enum>
+        <enum internal="PMIPV6" value="3">PMIPV6</enum>
+      </enumeration>
+    </parametertype>
+    <parametertype>
+      <name>CAUSE_CODE</name>
+      <type>UINT</type>
+      <description>Provides information regarding the acceptance or rejection of an operation. The other parameter CAUSE_PROTOCOL has to be analyzed to provide the protocol from where a cause code in an event originates.</description>
+      <numberofbits>10</numberofbits>
+      <range>
+        <low>0</low>
+        <high>1023</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_ID</name>
+      <type>UINT</type>
+      <description>EPS Bearer ID. Identifies one of several bearers in a bearer list.</description>
+      <detaileddescription>Defined in TS 24.007, chapter 11.2.3.1.5. Used values are 0, 5-15.</detaileddescription>
+      <numberofbits>4</numberofbits>
+      <range>
+        <low>0</low>
+        <high>15</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_QCI</name>
+      <type>UINT</type>
+      <description>Provides information on a QoS class identifier for the bearer.</description>
+      <detaileddescription>Defined in TS 29.274, chapter 8.15 and TS 36.413, chapter 9.2.1.15.</detaileddescription>
+      <numberofbits>8</numberofbits>
+      <range>
+        <low>0</low>
+        <high>255</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>ARP_PRIORITY_LEVEL</name>
+      <type>UINT</type>
+      <description>Provides information on Priority Level of Allocation and Retention Priority for the bearer.</description>
+      <detaileddescription>Defined in TS 29.274, chapter 8.15 and TS 29.212, chapter 5.3.45.</detaileddescription>
+      <numberofbits>4</numberofbits>
+      <range>
+        <low>1</low>
+        <high>15</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>ARP_PCI</name>
+      <type>ENUM</type>
+      <description>Provides information on Pre-emption-Capability of Allocation and Retention Priority for the bearer.</description>
+      <detaileddescription>Defined in TS 29.274, chapter 8.15 and TS 29.212, chapter 5.3.46.</detaileddescription>
+      <numberofbits>1</numberofbits>
+      <enumeration>
+        <enum internal="ENABLED" value="0">Pre-emption-Capability enabled</enum>
+        <enum internal="DISABLED" value="1">Pre-emption-Capability disabled</enum>
+      </enumeration>
+    </parametertype>
+    <parametertype>
+      <name>ARP_PVI</name>
+      <type>ENUM</type>
+      <description>Provides information on Pre-emption-Vulnerability of Allocation and Retention Priority for the bearer.</description>
+      <detaileddescription>Defined in TS 29.274, chapter 8.15 and TS 29.212, chapter 5.3.47.</detaileddescription>
+      <numberofbits>1</numberofbits>
+      <enumeration>
+        <enum internal="ENABLED" value="0">Pre-emption-Vulnerability enabled</enum>
+        <enum internal="DISABLED" value="1">Pre-emption-Vulnerability disabled</enum>
+      </enumeration>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_MBR_UL</name>
+      <type>UINT</type>
+      <description>Provides Maximum Bit Rate (kbps) in uplink direction for a GBR bearer.</description>
+      <detaileddescription>Defined in TS 29.274, chapter 8.15 and TS 36.413, chapter 9.2.1.18-19.</detaileddescription>
+      <numberofbits>24</numberofbits>
+      <range>
+        <low>0</low>
+        <high>10000000</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_MBR_DL</name>
+      <type>UINT</type>
+      <description>Provides Maximum Bit Rate (kbps) in downlink direction for a GBR bearer.</description>
+      <detaileddescription>Defined in TS 29.274, chapter 8.15 and TS 36.413, chapter 9.2.1.18-19.</detaileddescription>
+      <numberofbits>24</numberofbits>
+      <range>
+        <low>0</low>
+        <high>10000000</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_GBR_UL</name>
+      <type>UINT</type>
+      <description>Provides Guaranteed Bit Rate (kbps) in uplink direction for a GBR bearer.</description>
+      <detaileddescription>Defined in TS 29.274, chapter 8.15 and TS 36.413, chapter 9.2.1.18-19.</detaileddescription>
+      <numberofbits>24</numberofbits>
+      <range>
+        <low>0</low>
+        <high>10000000</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_GBR_DL</name>
+      <type>UINT</type>
+      <description>Provides Guaranteed Bit Rate (kbps) in downlink direction for a GBR bearer.</description>
+      <detaileddescription>Defined in TS 29.274, chapter 8.15 and TS 36.413, chapter 9.2.1.18-19.</detaileddescription>
+      <numberofbits>24</numberofbits>
+      <range>
+        <low>0</low>
+        <high>10000000</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_CAUSE</name>
+      <type>UINT</type>
+      <description>Indicates for each bearer in a bearer list whether the bearer handling was successful, and if not, gives information on the reason.</description>
+      <detaileddescription>A subset of the values defined in TS 29.274, table 8.4-1. The parameter is not present in PGW DATA_USAGE events, hence 'optional flag' is set for PGW DATA_USAGE events.</detaileddescription>
+      <numberofbits>10</numberofbits>
+      <range>
+        <low>0</low>
+        <high>1023</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_SENT_DL_PACKETS</name>
+      <type>UINT</type>
+      <description>Indicates how many packets have been sent by the SGW in the downlink direction for the bearer.</description>
+      <numberofbits>64</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_SENT_DL_BYTES</name>
+      <type>UINT</type>
+      <description>Indicates how many bytes have been sent by the SGW in the downlink direction for the bearer.</description>
+      <numberofbits>64</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_RCVD_UL_PACKETS</name>
+      <type>UINT</type>
+      <description>Indicates how many packets have been received by the SGW in the uplink direction for the bearer.</description>
+      <numberofbits>64</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_RCVD_UL_BYTES</name>
+      <type>UINT</type>
+      <description>Indicates how many bytes have been received by the SGW in the uplink direction for the bearer.</description>
+      <numberofbits>64</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_DROPPED_DL_PACKETS</name>
+      <type>UINT</type>
+      <description>Indicates how many packets have been lost in the downlink direction for the bearer.</description>
+      <numberofbits>64</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_DROPPED_UL_PACKETS</name>
+      <type>UINT</type>
+      <description>Indicates how many packets have been lost in the uplink direction for the bearer.</description>
+      <numberofbits>64</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>MCC</name>
+      <type>IBCD</type>
+      <description>Mobile Country Code. The MCC uniquely identifies the country of domicile of the mobile subscriber.</description>
+      <detaileddescription>
+        Defined in TS 24.008, chapter 10.5.1.4. Format is an integer in BCD format: HEX #{mcc1}{mcc2}{mcc3}, where each {mccX} is a 4 bit BCD digit (0-9).
+        #000 = no valid parameter value available.
+        The parameter is not present in PGW DATA_USAGE events, hence 'optional flag' is set for PGW DATA_USAGE events.
+      </detaileddescription>
+      <numberofbits>12</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>MNC</name>
+      <type>IBCD</type>
+      <description>Mobile Network Code. The MNC identifies the home PLMN of the mobile subscriber.</description>
+      <detaileddescription>
+        Defined in TS 24.008, chapter 10.5.1.4. Format is an integer in BCD format: HEX #{mnc1}{mnc2}{mnc3}, where each {mncX} is a 4 bit BCD digit (0-9).
+        F is used as filler digit, for example MNC =12 results in HEX#F12.
+        #000 = no valid parameter value available.
+        The parameter is not present in PGW DATA_USAGE events, hence 'optional flag' is set for PGW DATA_USAGE events.
+      </detaileddescription>
+      <numberofbits>12</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>IMSI</name>
+      <type>TBCD</type>
+      <description>International Mobile Subscriber Identity. The IMSI contains information that is commonly used to identify the UE in the CN.</description>
+      <detaileddescription>
+        Defined in TS 23.003 chapter 2.2 for the composition, and TS 29.274 chapter 8.3 for the coding.
+        5-15 digits, TBCD (Telephony Binary Coded Decimal), each digit represented by 4 bits.
+        Padded with '1111' for each unused digit up to a total length of 8 octets/16 digits.
+      </detaileddescription>
+      <numberofbits>64</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>IMSI_VALIDATION</name>
+      <type>ENUM</type>
+      <description>Indicates whether the IMSI is authenticated.</description>
+      <detaileddescription>Parameter is omitted if IMSI is missing.</detaileddescription>
+      <numberofbits>1</numberofbits>
+      <enumeration>
+        <enum internal="AUTHENTICATED" value="0">IMSI is authenticated</enum>
+        <enum internal="UNAUTHENTICATED" value="1">IMSI is not authenticated</enum>
+      </enumeration>
+    </parametertype>
+    <parametertype>
+      <name>IMEISV</name>
+      <type>TBCD</type>
+      <description>International Mobile Equipment Identity Software Version</description>
+      <detaileddescription>
+        Defined in TS 23.003 chapter 6.2 and chapter B1. Encoded according to TS 29.060 chapter 7.7.53.
+        Three sets of digits; 8, 6, and 2 digits respectively. TBCD (Telephony Binary Coded Decimal), each digit represented by 4 bits.
+        Padded with '1111' for each unused digit up to a total length of 8 octets/16 digits.
+      </detaileddescription>
+      <numberofbits>64</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>APN</name>
+      <type>DNSNAME</type>
+      <description>Access Point Name. For PGW events, only the APN Network Identifier part of the APN is included.</description>
+      <detaileddescription>
+        Defined in TS 23.003 chapter 9.1. Up to 100 octets.
+        The first octet of a label contains length, the following octets contain ASCII characters. This is repeated for all the labels of the APN, for example ab.dce.fg becomes 2ab3dce2fg.
+        The APN parameter is byte-aligned and it is preceded by a length-field.
+        The parameter is not present in PGW DATA_USAGE events, hence 'optional flag' is set for PGW DATA_USAGE events.
+      </detaileddescription>
+      <lengthbits>7</lengthbits>
+      <validlength>
+        <low>1</low>
+        <high>100</high>
+      </validlength>
+    </parametertype>
+    <parametertype>
+      <name>APN_AMBR_UL</name>
+      <type>UINT</type>
+      <description>Aggregate Maximum Bit Rate (kbps) in the uplink direction</description>
+      <detaileddescription>Defined in TS 29.274, chapter 8.7 and TS 24.301, chapter 9.9.4.2. The parameter is not present in PGW events, hence 'optional flag' is set for PGW events.</detaileddescription>
+      <numberofbits>32</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>APN_AMBR_DL</name>
+      <type>UINT</type>
+      <description>Aggregate Maximum Bit Rate (kbps) in the downlink direction</description>
+      <detaileddescription>Defined in TS 29.274, chapter 8.7 and TS 24.301, chapter 9.9.4.2. The parameter is not present in PGW events, hence 'optional flag' is set for PGW events.</detaileddescription>
+      <numberofbits>32</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>IPV4</name>
+      <type>IPADDRESS</type>
+      <description>IPv4 address</description>
+      <detaileddescription>Defined in TS 29.274 chapter 8.22, TS 23.003 chapter 5. Consists of 4 octets</detaileddescription>
+      <numberofbits>32</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>IPV6</name>
+      <type>IPADDRESSV6</type>
+      <description>IPv6 address</description>
+      <detaileddescription>Defined in TS 29.274 chapter 8.22, TS 23.003 chapter 5. Consists of 16 octets</detaileddescription>
+      <numberofbits>128</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>TAC</name>
+      <type>UINT</type>
+      <description>Tracking Area Code. Used to uniquely identify a Tracking Area Code.</description>
+      <detaileddescription>Defined in TS 29.274 chapter 8.21.4. The parameter is not present in PGW events, hence 'optional flag' is set for PGW events.</detaileddescription>
+      <numberofbits>16</numberofbits>
+      <range>
+        <low>0</low>
+        <high>65535</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>ECI</name>
+      <type>UINT</type>
+      <description>E-UTRAN Cell Identity. Used to identify cells within a PLMN.</description>
+      <detaileddescription>Defined in TS 29.274 chapter 8.21.5. The parameter is not present in PGW events, hence 'optional flag' is set for PGW events.</detaileddescription>
+      <numberofbits>28</numberofbits>
+      <range>
+        <low>0</low>
+        <high>268435455</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>LAC</name>
+      <type>UINT</type>
+      <description>Location Area Code</description>
+      <detaileddescription>Defined in TS 29.274 chapter 8.21.1-3. The parameter is not present in PGW events, hence 'optional flag' is set for PGW events.</detaileddescription>
+      <numberofbits>16</numberofbits>
+      <range>
+        <low>0</low>
+        <high>65535</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>RAC</name>
+      <type>UINT</type>
+      <description>Routing Area Code</description>
+      <detaileddescription>Defined in TS 29.274 chapter 8.21.3. The parameter is not present in PGW events, hence 'optional flag' is set for PGW events.</detaileddescription>
+      <numberofbits>8</numberofbits>
+      <range>
+        <low>0</low>
+        <high>255</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>CI</name>
+      <type>UINT</type>
+      <description>Cell Identity</description>
+      <detaileddescription>Defined in TS 29.274 chapter 8.21.1. The parameter is not present in PGW events, hence 'optional flag' is set for PGW events.</detaileddescription>
+      <numberofbits>16</numberofbits>
+      <range>
+        <low>0</low>
+        <high>65535</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>SAC</name>
+      <type>UINT</type>
+      <description>Service Area Code</description>
+      <detaileddescription>Defined in TS 29.274 chapter 8.21.2. The parameter is not present in PGW events, hence 'optional flag' is set for PGW events.</detaileddescription>
+      <numberofbits>16</numberofbits>
+      <range>
+        <low>0</low>
+        <high>65535</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>EVENT_TRIGGER</name>
+      <type>ENUM</type>
+      <description>Indicates the reason why the event was triggered.</description>
+      <numberofbits>8</numberofbits>
+      <range>
+        <low>0</low>
+        <high>255</high>
+      </range>
+      <enumeration>
+        <enum internal="NO_INFORMATION" value="0">No information</enum>
+        <enum internal="CREATE_NEW_PDN_CONNECTION" value="1">Create new PDN connection</enum>
+        <enum internal="DELETE_PDN_CONNECTION" value="2">Delete PDN connection</enum>
+        <enum internal="BEARER_ACTIVATION" value="3">Bearer activation</enum>
+        <enum internal="BEARER_DEACTIVATION" value="4">Bearer deactivation</enum>
+        <enum internal="PGW_INITIATED_BEARER_MODIFICATION" value="5">PGW initiated bearer modification</enum>
+        <enum internal="MOBILITY_OR_SERVICE_REQUEST" value="6">Mobility or Service request</enum>
+        <enum internal="MOBILITY_WITH_SGW_CHANGE" value="7">Mobility with SGW change</enum>
+        <enum internal="EVENT_TRIGGERED_INTERNALLY" value="8">Event triggered internally</enum>
+        <enum internal="CS_FALLBACK_OR_SRVCC" value="9">CS fallback or SRVCC</enum>
+        <enum internal="HANDOVER_TO_NON_3GPP" value="10">Handover to non-3GPP</enum>
+        <enum internal="HANDOVER_FROM_NON_3GPP" value="11">Handover from non-3GPP</enum>
+        <enum internal="SERVICE_REQUEST_DUE_TO_DOWNLINK_DATA_RECEIVED" value="12">Service request due to downlink data received</enum>
+        <enum internal="ERROR_INDICATION_RECEIVED" value="13">Error Indication received</enum>
+        <enum internal="SERVICE_RESTORATION_DUE_TO_DOWNLINK_DATA_RECEIVED" value="14">Service restoration due to downlink data received</enum>
+        <enum internal="SERVICE_RESTORATION_DUE_TO_MESSAGE_RECEIVED" value="15">Service restoration due to message received</enum>
+        <enum internal="SERVICE_RESTORATION_BY_TRYING_ANOTHER_MME_OR_SGSN" value="16">Service restoration by trying another MME or SGSN</enum>
+        <enum internal="DDN_FAILURE_INDICATION_RECEIVED" value="17">Downlink Data Notification Failure Indication received</enum>
+        <enum internal="RELOCATION_TO_OTHER_MME_OR_SGSN_IN_POOL" value="18">The associated UE device has been relocated to another MME or SGSN in the pool</enum>
+        <enum internal="EVENT_INVOKED_BY_MANAGEMENT" value="19">Event invoked by management</enum>
+        <enum internal="SERVICE_RESTORATION_DUE_TO_ERROR_INDICATION_RECEIVED" value="20">Service restoration due to error indication received</enum>
+        <enum internal="SERVICE_REQUEST_DUE_TO_SERVICE_AWARE_SMART_PAGING" value="21">Service request due to service aware smart paging</enum>
+        <enum internal="PAUSE_CHARGING_DUE_TO_DROPPED_PAYLOAD" value="22">Inform PGW to pause charging since one of the configured thresholds for dropped payload packets or bytes is exceeded</enum>
+      </enumeration>
+    </parametertype>
+    <parametertype>
+      <name>ORIGINATING_NODE</name>
+      <type>ENUM</type>
+      <description>The value represents the node type that initiated the event.</description>
+      <detaileddescription>The node uses SELF when the event is initiated by the node itself.</detaileddescription>
+      <numberofbits>4</numberofbits>
+      <enumeration>
+        <enum internal="SELF" value="0">SELF</enum>
+        <enum internal="SGW" value="1">SGW</enum>
+        <enum internal="PGW" value="2">PGW</enum>
+        <enum internal="MME" value="3">MME</enum>
+        <enum internal="S4_SGSN" value="4">S4_SGSN</enum>
+        <enum internal="GN_SGSN" value="5">GN_SGSN</enum>
+        <enum internal="UNKNOWN" value="6">UNKNOWN</enum>
+      </enumeration>
+    </parametertype>
+    <parametertype>
+      <name>BYTE_HOUR</name>
+      <type>UINT</type>
+      <description>UTC Timestamp, Hour. HH</description>
+      <numberofbits>8</numberofbits>
+      <range>
+        <low>0</low>
+        <high>23</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>BYTE_MINUTE</name>
+      <type>UINT</type>
+      <description>UTC Timestamp, Minute. MM</description>
+      <numberofbits>8</numberofbits>
+      <range>
+        <low>0</low>
+        <high>59</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>BYTE_SECOND</name>
+      <type>UINT</type>
+      <description>UTC Timestamp, Second. SS</description>
+      <detaileddescription>The second value 60 indicates a leap second.</detaileddescription>
+      <numberofbits>8</numberofbits>
+      <range>
+        <low>0</low>
+        <high>60</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>BYTE_UTC_SIGN</name>
+      <type>UINT</type>
+      <description>UTC sign. 0 represents +, and 1 represents - </description>
+      <numberofbits>8</numberofbits>
+      <range>
+        <low>0</low>
+        <high>1</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>ERROR_TYPE</name>
+      <type>ENUM</type>
+      <description>Error type</description>
+      <numberofbits>8</numberofbits>
+      <enumeration>
+        <enum internal="OTHER" value="0">Other error</enum>
+        <enum internal="CONN_COM_ERR" value="1">Connection failed</enum>
+        <enum internal="CONGESTION" value="2">Connection congested</enum>
+      </enumeration>
+    </parametertype>
+    <parametertype>
+      <name>CAUSE_OF_HEADER</name>
+      <type>ENUM</type>
+      <description>Provides reason why a header record is sent in the stream.</description>
+      <numberofbits>8</numberofbits>
+      <enumeration>
+        <enum internal="STREAM_ENABLED" value="0">Stream enabled</enum>
+        <enum internal="STREAM_RESTART_AFTER_COMM_FAILURE" value="1">Stream restart after communication failure</enum>
+        <enum internal="STREAM_RESTART_AFTER_RE_CONFIG" value="2">Stream restart after reconfiguration</enum>
+        <enum internal="LOCAL_TIME_CHANGE" value="3">Local time changed</enum>
+        <enum internal="OTHER" value="4">Other reason</enum>
+      </enumeration>
+    </parametertype>
+    <parametertype>
+      <name>NODE_ID</name>
+      <type>BYTEARRAY</type>
+      <description>Node Identity, defined as an ASCII string</description>
+      <detaileddescription>The parameter is byte-aligned and it is preceded by a length-field.</detaileddescription>
+      <lengthbits>8</lengthbits>
+      <validlength>
+        <low>0</low>
+        <high>20</high>
+      </validlength>
+    </parametertype>
+    <parametertype>
+      <name>NUMBER_OF_DROPPED_EVENTS</name>
+      <type>UINT</type>
+      <description>Indicates how many events have been lost during a period of streaming error.</description>
+      <numberofbits>32</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>INTERNAL_CAUSE_CODE</name>
+      <type>ENUM</type>
+      <description>Provides information about the result of an internally triggered operation. This information is used when CAUSE_PROTOCOL value is set to INTERNAL.</description>
+      <numberofbits>10</numberofbits>
+      <range>
+        <low>0</low>
+        <high>1023</high>
+      </range>
+       <enumeration>
+        <enum internal="SUCCESS" value="0">Successful operation</enum>
+        <enum internal="FAILURE" value="1">The operation failed.</enum>
+      </enumeration>
+    </parametertype>
+    <parametertype>
+      <name>GTPV2_CAUSE_CODE</name>
+      <type>UINT</type>
+      <description>Provides information about the reason for acceptance or rejection of a request message. This information is used when CAUSE_PROTOCOL value is set to GTPV2.</description>
+      <detaileddescription>Defined in TS 29.274 table 8.4-1.</detaileddescription>
+      <numberofbits>10</numberofbits>
+      <range>
+        <low>0</low>
+        <high>1023</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>SUB_CAUSE_CODE</name>
+      <type>UINT</type>
+      <description>Provides information about detailed reason for failure. This information has to be analyzed together with the CAUSE_CODE parameter and the CAUSE_PROTOCOL parameter.</description>
+      <detaileddescription></detaileddescription>
+      <numberofbits>10</numberofbits>
+      <range>
+        <low>0</low>
+        <high>1023</high>
+      </range>
+    </parametertype>
+    <parametertype>
+      <name>PDN_ID</name>
+      <type>UINT</type>
+      <description>The PDN identifier is based on the Charging ID.</description>
+      <detaileddescription>Defined in TS 32.251. The parameter is not present in SGW events, hence 'optional flag' is set for SGW events.</detaileddescription>
+      <numberofbits>32</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>SERVICE_UL_BYTES</name>
+      <type>UINT</type>
+      <description>Indicates how many bytes have been forwarded by the EPG in the uplink direction for the service.</description>
+      <detaileddescription></detaileddescription>
+      <numberofbits>64</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>SERVICE_DL_BYTES</name>
+      <type>UINT</type>
+      <description>Indicates how many bytes have been forwarded by the EPG in the downlink direction for the service.</description>
+      <detaileddescription></detaileddescription>
+      <numberofbits>64</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_UL_BYTES</name>
+      <type>UINT</type>
+      <description>Indicates how many bytes have been forwarded by the EPG in the uplink direction for the bearer.</description>
+      <detaileddescription></detaileddescription>
+      <numberofbits>64</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_DL_BYTES</name>
+      <type>UINT</type>
+      <description>Indicates how many bytes have been forwarded by the EPG in the downlink direction for the bearer.</description>
+      <detaileddescription></detaileddescription>
+      <numberofbits>64</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_UL_PACKETS</name>
+      <type>UINT</type>
+      <description>Indicates how many packets have been forwarded by the EPG in the uplink direction for the bearer.</description>
+      <detaileddescription>The parameter is not yet supported in PGW DATA_USAGE events, hence 'optional flag' is set for PGW DATA_USAGE events. To be suppored in later release.</detaileddescription>
+      <numberofbits>64</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>BEARER_DL_PACKETS</name>
+      <type>UINT</type>
+      <description>Indicates how many packets have been forwarded by the EPG in the downlink direction for the bearer.</description>
+      <detaileddescription>The parameter is not yet supported in PGW DATA_USAGE events, hence 'optional flag' is set for PGW DATA_USAGE events. To be suppored in later release.</detaileddescription>
+      <numberofbits>64</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>RATING_GROUP</name>
+      <type>UINT</type>
+      <description>Rating Group identifier.</description>
+      <detaileddescription>Defined in TS 23.203.</detaileddescription>
+      <numberofbits>32</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>SERVICE_IDENTIFIER</name>
+      <type>UINT</type>
+      <description>Service Identifier.</description>
+      <detaileddescription>Defined in TS 23.203.</detaileddescription>
+      <numberofbits>32</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>URI_ID</name>
+      <type>UINT</type>
+      <description>Numerical Uniform Resource Identifier.</description>
+      <detaileddescription></detaileddescription>
+      <numberofbits>32</numberofbits>
+    </parametertype>
+    <parametertype>
+      <name>URI_NAME</name>
+      <type>BYTEARRAY</type>
+      <description>Textual Uniform Resource Identifier, defined as an ASCII string.</description>
+      <detaileddescription>Defined in RFC 1630. The parameter is byte-aligned and it is preceded by a length-field.</detaileddescription>
+      <lengthbits>8</lengthbits>
+    </parametertype>
+    <parametertype>
+      <name>RULE_SPACE</name>
+      <type>BYTEARRAY</type>
+      <description>Rule Space name, defined as an ASCII string.</description>
+      <detaileddescription>The parameter is byte-aligned and it is preceded by a length-field. The parameter is only present in PGW SESSION_INFO events, hence 'optional flag' is set for other event types.</detaileddescription>
+      <lengthbits>7</lengthbits>
+      <validlength>
+        <low>1</low>
+        <high>64</high>
+      </validlength>
+    </parametertype>
+    <parametertype>
+      <name>DSCP</name>
+      <type>ENUM</type>
+      <description>Provides information on the inner Differentiated Services Code Point (DSCP) value of the IP header for an inspected downlink packet</description>
+      <detaileddescription></detaileddescription>
+      <numberofbits>6</numberofbits>
+      <enumeration>
+        <enum internal="BE" value="0">BE</enum>
+        <enum internal="CS1" value="8">CS1</enum>
+        <enum internal="AF11" value="10">AF11</enum>
+        <enum internal="AF12" value="12">AF12</enum>
+        <enum internal="AF13" value="14">AF13</enum>
+        <enum internal="CS2" value="16">CS2</enum>
+        <enum internal="AF21" value="18">AF21</enum>
+        <enum internal="AF22" value="20">AF22</enum>
+        <enum internal="AF23" value="22">AF23</enum>
+        <enum internal="CS3" value="24">CS3</enum>
+        <enum internal="AF31" value="26">AF31</enum>
+        <enum internal="AF32" value="28">AF32</enum>
+        <enum internal="AF33" value="30">AF33</enum>
+        <enum internal="CS4" value="32">CS4</enum>
+        <enum internal="AF41" value="34">AF41</enum>
+        <enum internal="AF42" value="36">AF42</enum>
+        <enum internal="AF43" value="38">AF43</enum>
+        <enum internal="CS5" value="40">CS5</enum>
+        <enum internal="EF" value="46">EF</enum>
+        <enum internal="CS6" value="48">CS6</enum>
+        <enum internal="CS7" value="56">CS7</enum>
+      </enumeration>
+    </parametertype>
+  </parametertypes>
+  <structuretypes>
+    <structuretype>
+      <name>HEADER</name>
+      <elements>
+        <param type="EVENT_ID">EVENT_ID</param>
+        <param type="EVENT_RESULT">EVENT_RESULT</param>
+        <param type="TIME_HOUR">TIME_HOUR</param>
+        <param type="TIME_MINUTE">TIME_MINUTE</param>
+        <param type="TIME_SECOND">TIME_SECOND</param>
+        <param type="TIME_MILLISECOND">TIME_MILLISECOND</param>
+        <param type="DURATION">DURATION</param>
+      </elements>
+    </structuretype>
+    <structuretype>
+      <name>UE_INFO</name>
+      <elements>
+        <param type="IMSI" optional="true">IMSI</param>
+        <param type="IMSI_VALIDATION" optional="true">IMSI_VALIDATION</param>
+        <param type="IMEISV" optional="true">IMEISV</param>
+        <param type="MCC" optional="true">MCC</param>
+        <param type="MNC" optional="true">MNC</param>
+        <param type="TAC" optional="true">TAC</param>
+        <param type="ECI" optional="true">ECI</param>
+        <param type="LAC" optional="true">LAC</param>
+        <param type="RAC" optional="true">RAC</param>
+        <param type="CI" optional="true">CI</param>
+        <param type="SAC" optional="true">SAC</param>
+      </elements>
+    </structuretype>
+    <structuretype>
+      <name>APN_AMBR</name>
+      <elements>
+        <param type="APN_AMBR_UL" optional="true">APN_AMBR_UL</param>
+        <param type="APN_AMBR_DL" optional="true">APN_AMBR_DL</param>
+      </elements>
+    </structuretype>
+    <structuretype>
+      <name>IPADDRESS_STRUCT</name>
+      <elements>
+        <param type="IPV4" optional="true">IPV4</param>
+        <param type="IPV6" optional="true">IPV6</param>
+      </elements>
+    </structuretype>
+    <structuretype>
+      <name>BEARER_STATISTICS</name>
+      <elements>
+        <param type="BEARER_SENT_DL_PACKETS" optional="true">SENT_DL_PACKETS</param>
+        <param type="BEARER_SENT_DL_BYTES" optional="true">SENT_DL_BYTES</param>
+        <param type="BEARER_RCVD_UL_PACKETS" optional="true">RCVD_UL_PACKETS</param>
+        <param type="BEARER_RCVD_UL_BYTES" optional="true">RCVD_UL_BYTES</param>
+        <param type="BEARER_DROPPED_DL_PACKETS" optional="true">DROPPED_DL_PACKETS</param>
+        <param type="BEARER_DROPPED_UL_PACKETS" optional="true">DROPPED_UL_PACKETS</param>
+      </elements>
+    </structuretype>
+    <structuretype>
+      <name>BEARER_QOS</name>
+      <elements>
+        <param type="BEARER_QCI" optional="true">QCI</param>
+        <param type="ARP_PRIORITY_LEVEL" optional="true">ARP_PRIORITY_LEVEL</param>
+        <param type="ARP_PCI" optional="true">ARP_CAPABILITY</param>
+        <param type="ARP_PVI" optional="true">ARP_VULNERABILITY</param>
+        <param type="BEARER_MBR_UL" optional="true">MBR_UL</param>
+        <param type="BEARER_MBR_DL" optional="true">MBR_DL</param>
+        <param type="BEARER_GBR_UL" optional="true">GBR_UL</param>
+        <param type="BEARER_GBR_DL" optional="true">GBR_DL</param>
+      </elements>
+    </structuretype>
+    <structuretype>
+      <name>BEARER_INFO</name>
+      <elements>
+        <param type="BEARER_ID" optional="true">EPS_BEARER_ID</param>
+        <param type="BEARER_CAUSE" optional="true">BEARER_CAUSE</param>
+      </elements>
+    </structuretype>
+    <structuretype>
+      <name>BEARER_INFO_STATISTICS</name>
+      <elements>
+        <struct type="BEARER_INFO">BEARER_INFO</struct>
+        <struct type="BEARER_STATISTICS">BEARER_STATISTICS</struct>
+      </elements>
+    </structuretype>
+    <structuretype>
+      <name>BEARER_INFO_QOS</name>
+      <elements>
+        <struct type="BEARER_INFO">BEARER_INFO</struct>
+        <struct type="BEARER_QOS">BEARER_QOS</struct>
+      </elements>
+    </structuretype>
+    <structuretype>
+      <name>PDN_INFO</name>
+     <!--  <description>
+        The sub struct ALLOCATED_UE_ADDRESS is not present in PGW DATA_USAGE events, hence 'optional flag' is set for PGW DATA_USAGE events.
+      </description> -->
+      <elements>
+        <param type="BEARER_ID" optional="true">DEFAULT_BEARER_ID</param>
+        <param type="APN" optional="true">APN</param>
+        <struct type="IPADDRESS_STRUCT">PGW_ADDRESS</struct>
+        <struct type="IPADDRESS_STRUCT">ALLOCATED_UE_ADDRESS</struct>
+        <struct type="APN_AMBR">APN_AMBR</struct>
+        <param type="PDN_ID" optional="true">PDN_ID</param>
+        <param type="RULE_SPACE" optional="true">RULE_SPACE</param>
+      </elements>
+    </structuretype>
+    <structuretype>
+      <name>BEARER_USAGE</name>
+      <elements>
+        <param type="BEARER_UL_PACKETS" optional="true">BEARER_UL_PACKETS</param>
+        <param type="BEARER_DL_PACKETS" optional="true">BEARER_DL_PACKETS</param>
+        <param type="BEARER_UL_BYTES" optional="true">BEARER_UL_BYTES</param>
+        <param type="BEARER_DL_BYTES" optional="true">BEARER_DL_BYTES</param>
+      </elements>
+    </structuretype>
+    <structuretype>
+      <name>BEARER_USAGE_INFO</name>
+      <elements>
+        <struct type="BEARER_INFO">BEARER_INFO</struct>
+        <struct type="BEARER_USAGE">BEARER_USAGE</struct>
+      </elements>
+    </structuretype>
+    <structuretype>
+      <name>SERVICE_INFO</name>
+      <elements>
+        <param type="RATING_GROUP" optional="true">RATING_GROUP</param>
+        <param type="SERVICE_IDENTIFIER" optional="true">SERVICE_IDENTIFIER</param>
+        <param type="URI_NAME" optional="true">URI_NAME</param>
+        <param type="URI_ID" optional="true">URI_ID</param>
+      </elements>
+    </structuretype>
+    <structuretype>
+      <name>SERVICE_USAGE</name>
+      <elements>
+        <param type="SERVICE_UL_BYTES" optional="true">SERVICE_UL_BYTES</param>
+        <param type="SERVICE_DL_BYTES" optional="true">SERVICE_DL_BYTES</param>
+      </elements>
+    </structuretype>
+    <structuretype>
+      <name>SERVICE_USAGE_INFO</name>
+      <elements>
+        <struct type="SERVICE_INFO">SERVICE_INFO</struct>
+        <struct type="SERVICE_USAGE">SERVICE_USAGE</struct>
+      </elements>
+    </structuretype>
+  </structuretypes>
+  <events>
+    <event>
+      <name>SESSION_DELETION</name>
+      <id>0</id>
+      <triggerdescription></triggerdescription>
+      <comment>SGW event. Provides information when a session is deleted.</comment>
+      <elements>
+        <struct type="HEADER">HEADER</struct>
+        <param type="CAUSE_PROTOCOL">CAUSE_PROTOCOL</param>
+        <param type="CAUSE_CODE">CAUSE_CODE</param>
+        <param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+        <param type="EVENT_TRIGGER">EVENT_TRIGGER</param>
+        <param type="ORIGINATING_NODE">ORIGINATING_NODE</param>
+        <struct type="PDN_INFO">PDN_INFO</struct>
+        <struct type="UE_INFO">UE_INFO</struct>
+        <struct seqmaxlen="11" type="BEARER_INFO_STATISTICS">BEARERS</struct>
+        <struct type="IPADDRESS_STRUCT">MME_OR_SGSN</struct>
+      </elements>
+    </event>
+    <event>
+      <name>BEARER_DELETION</name>
+      <id>1</id>
+      <triggerdescription></triggerdescription>
+      <comment>SGW event. Provides information when dedicated bearers or secondary PDP contexts are deleted.</comment>
+      <elements>
+        <struct type="HEADER">HEADER</struct>
+        <param type="CAUSE_PROTOCOL">CAUSE_PROTOCOL</param>
+        <param type="CAUSE_CODE">CAUSE_CODE</param>
+        <param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+        <param type="EVENT_TRIGGER">EVENT_TRIGGER</param>
+        <param type="ORIGINATING_NODE">ORIGINATING_NODE</param>
+        <struct type="PDN_INFO">PDN_INFO</struct>
+        <struct type="UE_INFO">UE_INFO</struct>
+        <struct seqmaxlen="11" type="BEARER_INFO_STATISTICS">BEARERS</struct>
+        <struct type="IPADDRESS_STRUCT">MME_OR_SGSN</struct>
+      </elements>
+    </event>
+    <event>
+      <name>SESSION_CREATION</name>
+      <id>2</id>
+      <triggerdescription></triggerdescription>
+      <comment>SGW event. Provides information when a session is created.</comment>
+      <elements>
+        <struct type="HEADER">HEADER</struct>
+        <param type="CAUSE_PROTOCOL">CAUSE_PROTOCOL</param>
+        <param type="CAUSE_CODE">CAUSE_CODE</param>
+        <param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+        <param type="EVENT_TRIGGER">EVENT_TRIGGER</param>
+        <param type="ORIGINATING_NODE">ORIGINATING_NODE</param>
+        <param type="RAT" optional="true">RAT</param>
+        <struct type="PDN_INFO">PDN_INFO</struct>
+        <struct type="UE_INFO">UE_INFO</struct>
+        <struct seqmaxlen="11" type="BEARER_INFO_QOS">BEARERS</struct>
+        <struct type="IPADDRESS_STRUCT">MME_OR_SGSN</struct>
+      </elements>
+    </event>
+    <event>
+      <name>BEARER_CREATION</name>
+      <id>3</id>
+      <triggerdescription></triggerdescription>
+      <comment>SGW event. Provides information when dedicated bearers or secondary PDP contexts are created.</comment>
+      <elements>
+        <struct type="HEADER">HEADER</struct>
+        <param type="CAUSE_PROTOCOL">CAUSE_PROTOCOL</param>
+        <param type="CAUSE_CODE">CAUSE_CODE</param>
+        <param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+        <param type="EVENT_TRIGGER">EVENT_TRIGGER</param>
+        <param type="ORIGINATING_NODE">ORIGINATING_NODE</param>
+        <struct type="PDN_INFO">PDN_INFO</struct>
+        <struct type="UE_INFO">UE_INFO</struct>
+        <struct seqmaxlen="11" type="BEARER_INFO_QOS">BEARERS</struct>
+        <struct type="IPADDRESS_STRUCT">MME_OR_SGSN</struct>
+      </elements>
+    </event>
+    <event>
+      <name>BEARER_MODIFICATION</name>
+      <id>4</id>
+      <triggerdescription></triggerdescription>
+      <comment>SGW event. Provides information when bearers are modified.</comment>
+      <elements>
+        <struct type="HEADER">HEADER</struct>
+        <param type="CAUSE_PROTOCOL">CAUSE_PROTOCOL</param>
+        <param type="CAUSE_CODE">CAUSE_CODE</param>
+        <param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+        <param type="EVENT_TRIGGER">EVENT_TRIGGER</param>
+        <param type="ORIGINATING_NODE">ORIGINATING_NODE</param>
+        <param type="RAT" optional="true">RAT</param>
+        <struct type="PDN_INFO">PDN_INFO</struct>
+        <struct type="UE_INFO">UE_INFO</struct>
+        <struct seqmaxlen="11" type="BEARER_INFO">BEARERS</struct>
+        <struct type="IPADDRESS_STRUCT">MME_OR_SGSN</struct>
+      </elements>
+    </event>
+    <event>
+      <name>BEARER_UPDATE</name>
+      <id>5</id>
+      <triggerdescription></triggerdescription>
+      <comment>SGW event. Provides information when the bearers are updated.</comment>
+      <elements>
+        <struct type="HEADER">HEADER</struct>
+        <param type="CAUSE_PROTOCOL">CAUSE_PROTOCOL</param>
+        <param type="CAUSE_CODE">CAUSE_CODE</param>
+        <param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+        <param type="EVENT_TRIGGER">EVENT_TRIGGER</param>
+        <param type="ORIGINATING_NODE">ORIGINATING_NODE</param>
+        <struct type="PDN_INFO">PDN_INFO</struct>
+        <struct type="UE_INFO">UE_INFO</struct>
+        <struct seqmaxlen="11" type="BEARER_INFO_QOS">BEARERS</struct>
+        <struct type="IPADDRESS_STRUCT">MME_OR_SGSN</struct>
+      </elements>
+    </event>
+    <event>
+      <name>SESSION_INFO</name>
+      <id>6</id>
+      <triggerdescription></triggerdescription>
+      <comment>PGW event. Provides information when a session is monitored.</comment>
+      <elements>
+        <struct type="HEADER">HEADER</struct>
+        <struct type="UE_INFO">UE_INFO</struct>
+        <struct type="PDN_INFO">PDN_INFO</struct>
+      </elements>
+    </event>
+    <event>
+      <name>DATA_USAGE</name>
+      <id>7</id>
+      <triggerdescription></triggerdescription>
+      <comment>PGW event. Provides data usage information.</comment>
+      <elements>
+        <struct type="HEADER">HEADER</struct>
+        <struct type="UE_INFO">UE_INFO</struct>
+        <struct type="PDN_INFO">PDN_INFO</struct>
+        <struct seqmaxlen="11" type="BEARER_USAGE_INFO">BEARER_USAGE_INFO</struct>
+        <struct seqmaxlen="255" type="SERVICE_USAGE_INFO">SERVICE_USAGE_INFO</struct>
+      </elements>
+    </event>
+    <event>
+      <name>SESSION_SUSPENSION</name>
+      <id>8</id>
+      <triggerdescription></triggerdescription>
+      <comment>SGW event. Provides information when a session is suspended.</comment>
+      <elements>
+        <struct type="HEADER">HEADER</struct>
+        <param type="CAUSE_PROTOCOL">CAUSE_PROTOCOL</param>
+        <param type="CAUSE_CODE">CAUSE_CODE</param>
+        <param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+        <param type="EVENT_TRIGGER">EVENT_TRIGGER</param>
+        <param type="ORIGINATING_NODE">ORIGINATING_NODE</param>
+        <struct type="PDN_INFO">PDN_INFO</struct>
+        <struct type="UE_INFO">UE_INFO</struct>
+        <struct type="IPADDRESS_STRUCT">MME_OR_SGSN</struct>
+      </elements>
+    </event>
+    <event>
+      <name>SESSION_RESUME</name>
+      <id>9</id>
+      <triggerdescription></triggerdescription>
+      <comment>SGW event. Provides information when a session is explicitly resumed.</comment>
+      <elements>
+        <struct type="HEADER">HEADER</struct>
+        <param type="CAUSE_PROTOCOL">CAUSE_PROTOCOL</param>
+        <param type="CAUSE_CODE">CAUSE_CODE</param>
+        <param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+        <param type="EVENT_TRIGGER">EVENT_TRIGGER</param>
+        <param type="ORIGINATING_NODE">ORIGINATING_NODE</param>
+        <struct type="PDN_INFO">PDN_INFO</struct>
+        <struct type="UE_INFO">UE_INFO</struct>
+        <struct type="IPADDRESS_STRUCT">MME_OR_SGSN</struct>
+      </elements>
+    </event>
+    <event>
+      <name>DOWNLINK_DATA_NOTIFICATION</name>
+      <id>10</id>
+      <triggerdescription></triggerdescription>
+      <comment>SGW event. Provides information about Downlink Data Notification (DDN), including DDN failures.</comment>
+      <elements>
+        <struct type="HEADER">HEADER</struct>
+        <param type="CAUSE_PROTOCOL">CAUSE_PROTOCOL</param>
+        <param type="CAUSE_CODE">CAUSE_CODE</param>
+        <param type="SUB_CAUSE_CODE">SUB_CAUSE_CODE</param>
+        <param type="EVENT_TRIGGER">EVENT_TRIGGER</param>
+        <param type="ORIGINATING_NODE">ORIGINATING_NODE</param>
+        <param type="RAT" optional="true">RAT</param>
+        <struct type="PDN_INFO">PDN_INFO</struct>
+        <struct type="UE_INFO">UE_INFO</struct>
+        <struct seqmaxlen="11" type="BEARER_INFO_QOS">BEARERS</struct>
+        <struct type="IPADDRESS_STRUCT">MME_OR_SGSN</struct>
+        <param type="ARP_PRIORITY_LEVEL" optional="true">SENT_ARP_PRIORITY_LEVEL</param>
+        <param type="ARP_PCI" optional="true">SENT_ARP_CAPABILITY</param>
+        <param type="ARP_PVI" optional="true">SENT_ARP_VULNERABILITY</param>
+        <param type="DSCP" optional="true">INNER_DSCP</param>
+      </elements>
+    </event>
+  </events>
+  <records>
+    <record>
+      <!-- Not used by EPG currently. It is used for EBM log file-->
+      <name>HEADER_RECORD</name>
+      <type>0</type>
+      <elements>
+        <param type="RECORD_LENGTH">RECORD_LENGTH</param>
+        <param type="RECORD_TYPE">RECORD_TYPE</param>
+        <param type="FILE_FORMAT_VERSION">FILE_FORMAT_VERSION</param>
+        <param type="FILE_INFORMATION_VERSION">FILE_INFORMATION_VERSION</param>
+        <param type="TIME_YEAR">TIME_YEAR</param>
+        <param type="TIME_MONTH">TIME_MONTH</param>
+        <param type="TIME_DAY">TIME_DAY</param>
+        <param type="BYTE_HOUR">BYTE_HOUR</param>
+        <param type="BYTE_MINUTE">BYTE_MINUTE</param>
+        <param type="BYTE_SECOND">BYTE_SECOND</param>
+      </elements>
+    </record>
+    <record>
+      <name>EVENT_RECORD</name>
+      <type>1</type>
+      <elements>
+        <param type="RECORD_LENGTH">RECORD_LENGTH</param>
+        <param type="RECORD_TYPE">RECORD_TYPE</param>
+        <content />
+      </elements>
+    </record>
+    <record>
+      <!-- Not used by EPG currently. It is used for EBM log file-->
+      <name>ERROR_RECORD</name>
+      <type>2</type>
+      <elements>
+        <param type="RECORD_LENGTH">RECORD_LENGTH</param>
+        <param type="RECORD_TYPE">RECORD_TYPE</param>
+        <param type="BYTE_HOUR">BYTE_HOUR</param>
+        <param type="BYTE_MINUTE">BYTE_MINUTE</param>
+        <param type="BYTE_SECOND">BYTE_SECOND</param>
+        <param type="ERROR_TYPE">ERROR_TYPE</param>
+      </elements>
+    </record>
+    <record>
+     <!-- Not used by EPG currently. It is used for EBM log file-->
+      <name>FOOTER_RECORD</name>
+      <type>3</type>
+      <elements>
+        <param type="RECORD_LENGTH">RECORD_LENGTH</param>
+        <param type="RECORD_TYPE">RECORD_TYPE</param>
+        <param type="FILE_TERMINATION_CAUSE">FILE_TERMINATION_CAUSE</param>
+      </elements>
+    </record>
+    <record>
+      <name>STREAM_HEADER_RECORD</name>
+      <type>4</type>
+      <elements>
+        <param type="RECORD_LENGTH">RECORD_LENGTH</param>
+        <param type="RECORD_TYPE">RECORD_TYPE</param>
+        <param type="FILE_FORMAT_VERSION">FILE_FORMAT_VERSION</param>
+        <param type="FILE_INFORMATION_VERSION">FILE_INFORMATION_VERSION</param>
+        <param type="TIME_YEAR">TIME_YEAR</param>
+        <param type="TIME_MONTH">TIME_MONTH</param>
+        <param type="TIME_DAY">TIME_DAY</param>
+        <param type="BYTE_HOUR">BYTE_HOUR</param>
+        <param type="BYTE_MINUTE">BYTE_MINUTE</param>
+        <param type="BYTE_SECOND">BYTE_SECOND</param>
+        <param type="BYTE_UTC_SIGN">UTC_SIGN</param>
+        <param type="BYTE_HOUR">UTC_OFFSET_HOUR</param>
+        <param type="BYTE_MINUTE">UTC_OFFSET_MINUTE</param>
+        <param type="CAUSE_OF_HEADER">CAUSE_OF_HEADER</param>
+        <param type="NODE_ID">NODE_ID</param>
+      </elements>
+    </record>
+    <record>
+      <name>STREAM_ERROR_RECORD</name>
+      <type>5</type>
+      <elements>
+        <param type="RECORD_LENGTH">RECORD_LENGTH</param>
+        <param type="RECORD_TYPE">RECORD_TYPE</param>
+        <param type="BYTE_HOUR">BYTE_HOUR</param>
+        <param type="BYTE_MINUTE">BYTE_MINUTE</param>
+        <param type="BYTE_SECOND">BYTE_SECOND</param>
+        <param type="ERROR_TYPE">ERROR_TYPE</param>
+        <param type="NUMBER_OF_DROPPED_EVENTS">NUMBER_OF_DROPPED_EVENTS</param>
+      </elements>
+    </record>
+  </records>
+</eventspecification>

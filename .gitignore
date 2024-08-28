@@ -1,0 +1,5 @@
+.pmd
+.project
+.settings/
+target/
+avro/src/main/

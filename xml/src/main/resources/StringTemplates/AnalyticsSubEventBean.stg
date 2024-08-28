@@ -1,0 +1,149 @@
+group EventClassMap;
+
+/**
+ * The main template that generates the class
+ */
+main(packageName, schema, schemaType, event, parameter,arrayParameter, defaultValuesNeeded) ::= <<
+package <packageName>.<schema>;
+
+/**
+ * This class is as java bean that holds a single <event> event for schema <schema>
+ * 
+ * This code is generated using java string templates
+ * see http://www.stringtemplate.org
+ */
+
+import java.io.Serializable;
+import org.apache.avro.Schema;
+import org.apache.avro.generic.GenericRecord;
+import org.apache.avro.util.Utf8;
+import com.ericsson.component.aia.common.avro.GenericRecordWrapper;
+
+<if (defaultValuesNeeded)>
+import com.ericsson.component.aia.model.eventbean.DefaultValues;
+<endif>
+
+@SuppressWarnings({"serial"})
+public class <event> extends <packageName>.<schemaType>.<event>  {
+    /**
+     * Define a default constructor
+     */
+    public <event>() {
+        super();
+    }
+     
+    /**
+     * Define a constructor for the base properties
+     * @param record of type GenericRecord
+     */
+    public static <event>  create (final GenericRecord record) {
+    
+     	<event>   object = new  <event>();
+      	object._TIMESTAMP= (long)record.get("_TIMESTAMP");
+      	object._NE= ((Utf8)record.get("_NE")).toString();
+      	object._ID= (int)record.get("_ID");
+        <parameter:createMapper()>
+	return object;
+    }
+ 	/**
+ 	*  This method converts this object to an Avro Generic Record
+ 	*
+ 	*/
+    public  GenericRecordWrapper  toAvro(final Long id,final Schema schema  ){
+		GenericRecordWrapper outputMap = new GenericRecordWrapper(id,schema);
+			outputMap.put("_TIMESTAMP",_TIMESTAMP);
+			outputMap.put("_NE",_NE);
+			outputMap.put("_ID",_ID);
+		<parameter:createMap()>
+		return outputMap;
+	}
+    
+}
+>>
+/**
+ * The template to create Map output for each parameter
+ */
+createMap(parameter) ::= <<
+<if (parameter.isByteArray)>
+     outputMap.put("<parameter.name>", java.nio.ByteBuffer.wrap( <parameter.name>));
+<else> 
+    outputMap.put("<parameter.name>", <parameter.name>);
+<endif>
+>>
+/**
+ * The template to create parameter getters
+ */
+createMapper(parameter) ::= <<
+
+<if (parameter.isString)>
+    object.<parameter.name> = (((String)record.get("<parameter.name>")).toString());
+<else>
+<if (parameter.isByteArray)>
+    object.<parameter.name> =( (java.nio.ByteBuffer)record.get("<parameter.name>") ).array();
+<else> 
+ <if (parameter.arrayElements)>
+     object.<parameter.name> = (<parameter.type>[])record.get("<parameter.name>" );
+ <else>
+    object.<parameter.name> = (<parameter.type>)record.get("<parameter.name>" );
+ <endif>
+<endif>
+<endif>
+>>
+/**
+ * The template to create setData statements
+ */
+createSetData(parameter) ::= <<
+	parameter = parameterIterator.next();
+    <if (parameter.arrayElements)>
+    <if (parameter.isoffsetToUseNeed)>
+    	int offsetForData = 0;
+    <endif>
+ 	offsetForData = offset;
+	for (int i = 0; i \< parameter.getValidStructureArraySize(); i++) {
+        <parameter:createArraySetData()>
+ 	}
+ 	<if (parameter.isLastStructParam)>
+ 	offset += parameter.getValidStructureArraySize() > 0 ? ((parameter.getValidStructureArraySize() - 1) * parameter.getStructSize()) : 0;
+ 	<endif>
+ 	offset = adjustOffset(parameter, offset);   
+ 	
+    <else>
+    <parameter:createNormalSetData()>
+    <endif>
+>>
+
+initializeArrayParameter(arrayParameter) ::= <<
+	<arrayParameter.name> = new <arrayParameter.type>[] { <arrayParameter.arrayItems> };<\n>
+	
+>>
+
+/**
+ * The template to create setData statements
+ */
+createArraySetData(parameter) ::= <<
+	<if (parameter.bits)>
+    <parameter.name>[i] = (<parameter.type>)DataConverters.<parameter.dataMethod>(data, offsetForData, parameter.isUseValid(), parameter.isOptional(), parameter.isValidLTEembeddedbitFlag(), parameter.getNumberOfBytes(), <parameter.bits>);
+	<else>
+    <parameter.name>[i] = (<parameter.type>)DataConverters.<parameter.dataMethod>(data, offsetForData, parameter.isUseValid(), parameter.isOptional(), parameter.isValidLTEembeddedbitFlag(), parameter.getNumberOfBytes());
+    <endif>
+    offsetForData = adjustOffset(parameter, offsetForData) + parameter.getEndSkip() + parameter.getStartSkip();
+>>
+
+/**
+ * The template to create setData statements
+ */
+createNormalSetData(parameter) ::= <<
+<if (parameter.bits)>
+<parameter.name> = (<parameter.type>)DataConverters.<parameter.dataMethod>(data, offset, parameter.isUseValid(), parameter.isOptional(), parameter.isValidLTEembeddedbitFlag(), parameter.getNumberOfBytes(), <parameter.bits>);
+<else>
+<if (parameter.asn1Parameter)>
+final int asn1Length = L3MESSAGE_LENGTH != DefaultValues.DEFAULT_INT_VALUE ? L3MESSAGE_LENGTH : 0;
+<parameter.name> = (<parameter.type>)DataConverters.<parameter.dataMethod>(data, offset, parameter.isUseValid(), parameter.isOptional(), parameter.isValidLTEembeddedbitFlag(), asn1Length);
+parameter.setNumberOfBytes(asn1Length);
+<else>	
+<parameter.name> = (<parameter.type>)DataConverters.<parameter.dataMethod>(data, offset, parameter.isUseValid(), parameter.isOptional(), parameter.isValidLTEembeddedbitFlag(), parameter.getNumberOfBytes());
+<endif>
+<endif>
+     offset = adjustOffset(parameter, offset);
+
+>>

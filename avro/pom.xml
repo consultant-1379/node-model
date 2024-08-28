@@ -1,0 +1,89 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.ericsson.component.aia.model.analytics</groupId>
+        <artifactId>node-models</artifactId>
+        <version>1.0.34-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>node-models-avro-json</artifactId>
+    <name>[${project.parent.artifactId}] node models avro module</name>
+
+    <properties>
+        <target.java.version>1.7</target.java.version>
+        <avro.schema.output.dir>${project.basedir}/src/main/resources/avro</avro.schema.output.dir>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>base</artifactId>
+            <version>1.0.4</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>node-models-xml</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${target.java.version}</source>
+                    <target>${target.java.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>generate-avro-schema</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>com.ericsson.component.aia.model.generation.avro.json.AvroSchemaGenerator</mainClass>
+                            <classpathScope>compile</classpathScope>
+                            <arguments>
+                                <argument>../xml/src/main/resources</argument>
+                                <argument>${avro.schema.output.dir}</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <configuration>
+                    <excludeRoots>
+                        <excludeRoot>target/generated-sources/ericsson</excludeRoot>
+                    </excludeRoots>
+                    <excludes>
+                        <exclude>**/generated/*.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

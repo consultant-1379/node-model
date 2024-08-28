@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.ericsson.aia</groupId>
+        <artifactId>integration</artifactId>
+        <version>1.0.37</version>
+    </parent>
+
+    <groupId>com.ericsson.component.aia.model.analytics</groupId>
+    <artifactId>node-models</artifactId>
+    <version>1.0.34-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>[${project.artifactId}] project</name>
+
+    <scm>
+        <developerConnection>${ericsson.scm.url}</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <properties>
+        <version.java>1.7</version.java>
+        <version.xerces>2.9.1</version.xerces>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <git.repository>/AIA/model/analytics-model/telco-model/node-model</git.repository>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jaxen</groupId>
+            <artifactId>jaxen</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jdom</groupId>
+            <artifactId>jdom</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+            <version>${version.xerces}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.ericsson.component.aia.model.analytics</groupId>
+            <artifactId>base</artifactId>
+            <version>1.0.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ericsson.component.aia.model.analytics</groupId>
+            <artifactId>avroSchemaGenerator</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${version.java}</source>
+                    <target>${version.java}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <configuration>
+                    <excludeRoots>
+                        <excludeRoot>target/generated-sources/ericsson</excludeRoot>
+                    </excludeRoots>
+                    <excludes>
+                        <exclude>**/generated/*.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <configuration>
+                    <excludes>**/generated/**/*</excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>validate</id>
+                        <goals>
+                            <goal>checkstyle</goal>
+                        </goals>
+                        <configuration>
+                            <failsOnError>false</failsOnError>
+                            <failOnViolation>false</failOnViolation>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <modules>
+        <module>xml</module>
+        <module>pojo</module>
+        <module>avro</module>
+        <module>analytics_pojo</module>
+    </modules>
+
+</project>
